@@ -17,27 +17,28 @@ int judge_priority(char ch1, char ch2) {
 
 
 void covert_to_RPN(string exp) {
-	stack<char> s;                   // stack storing operators
+	stack<char> s;                               // stack storing operators
 
 	for (char ch: exp) {
-		if (is_num(ch) || ch == '.') // if ch is digit
+		if (is_num(ch) || ch == '.')             // if ch is digit
 			putchar(ch);
-		else if (ch == '(' || s.empty())
-			s.push(ch);
+		else if (ch == '(' || s.empty())         // if ch is '(' or the stack is empty
+			s.push(ch);                          // directly push ch into stack
 		else if (ch == ')') {
-			while (not s.empty()) {
+			while (not s.empty()) {              // output all operators between the first '('
 				putchar(s.top());
 				s.pop();
-				
+
 				if (s.top() == '(') {
 					s.pop();
 					break;
 				}
 			}
 		}
-		else {
+		else {                                   // if ch is '+-*/'
 			int t = judge_priority(s.top(), ch);
-			if (t == 1) s.push(ch);
+			if (t == 1)                          // if the top operator in the stack has lower priority than current operator
+				s.push(ch);
 			else {
 				while (not s.empty() && judge_priority(s.top(), ch) == 0) {
 					putchar(s.top());
