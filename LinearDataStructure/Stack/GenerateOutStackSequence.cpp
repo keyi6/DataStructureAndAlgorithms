@@ -10,8 +10,7 @@ const int MAXL = 100;
 char str[MAXL], stack[MAXL];
 int len;
 
-void generate(int str_head, char * stack,
- 			  int stack_head, string out_seq) {
+void generate(int str_head, char * stack, int stack_head, string out_seq) {
 	if (out_seq.length() == len) {
 		cout << out_seq << endl;
 		return;
