@@ -17,10 +17,10 @@ int judge_priority(char ch1, char ch2) {
 
 
 void covert_to_RPN(string exp) {
-	stack<char> s;
+	stack<char> s;                   // stack storing operators
 
 	for (char ch: exp) {
-		if (is_num(ch) || ch == '.')
+		if (is_num(ch) || ch == '.') // if ch is digit
 			putchar(ch);
 		else if (ch == '(' || s.empty())
 			s.push(ch);
@@ -34,7 +34,7 @@ void covert_to_RPN(string exp) {
 					break;
 				}
 			}
-		}	
+		}
 		else {
 			int t = judge_priority(s.top(), ch);
 			if (t == 1) s.push(ch);
@@ -49,8 +49,13 @@ void covert_to_RPN(string exp) {
 		}
 	
 	}
-	while (not s.empty()) { putchar(s.top()); s.pop(); }
-	putchar(10);
+
+	while (not s.empty()) {
+		putchar(s.top());
+		s.pop();
+	}
+
+	cout << endl;
 }
 
 

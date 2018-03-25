@@ -16,18 +16,18 @@ void generate(int str_head, char * stack, int stack_head, string out_seq) {
 		return;
 	}
 
-	if (str_head < len) {
-		stack[stack_head] = str[str_head];
+	if (str_head < len) {                                       // if thers exists element nerver in stack
+		stack[stack_head] = str[str_head];                      // push this element into stack
 		generate(str_head + 1, stack, stack_head + 1, out_seq);
 	}
 
-	if (stack_head > 0) {
-		char ch = stack[stack_head - 1];
+	if (stack_head > 0) {                                       // if stack is not empty
+		char ch = stack[stack_head - 1];                        // make backup
 
-		out_seq.push_back(stack[stack_head - 1]);
+		out_seq.push_back(stack[stack_head - 1]);               // pop head element
 		generate(str_head, stack, stack_head - 1, out_seq);
 
-		stack[stack_head - 1] = ch;
+		stack[stack_head - 1] = ch;                             // restore
 	}
 }
 
