@@ -1,6 +1,6 @@
-Stack
-├── GenerateOutStackSequence.cpp
-└── ReversePolishNotation.cpp
+Stack <br>
+├── GenerateOutStackSequence.cpp <br>
+└── ReversePolishNotation.cpp <br>
 
 
 ## Stack 
