@@ -16,7 +16,7 @@ void generate(int str_head, char * stack, int stack_head, string out_seq) {
         return;
     }
 
-    if (str_head < len) {                                       // if thers exists element nerver in stack
+    if (str_head < len) {                                       // if there exists element never in stack
         stack[stack_head] = str[str_head];                      // push this element into stack
         generate(str_head + 1, stack, stack_head + 1, out_seq);
     }
