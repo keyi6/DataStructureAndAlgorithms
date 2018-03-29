@@ -32,9 +32,10 @@ class Node {
 
 template<typename T>
 class LinkList {
-	public:
+	protected:
 		Node<T> * head;
 
+	public:
 		// constructor
 		LinkList() {
 			head = new Node<T>;
@@ -114,10 +115,8 @@ class PolynomialNode {
 
 
 template<typename T>
-class Polynomial {
+class Polynomial : public LinkList< PolynomialNode<T> > {
 	private:
-		LinkList< PolynomialNode<T> > l;
-
 		T quick_pow(T base, int exp) {
 			if (exp < 0)
 				return pow(base, exp);
@@ -135,11 +134,11 @@ class Polynomial {
 
 	public:
 		// constructor
-		Polynomial() {}
+		Polynomial() :  LinkList< PolynomialNode<T> > () { }
 
 		// calculate value
 		T calc(T x) {
-			Node< PolynomialNode<T> > * temp = l.head -> next;
+			Node< PolynomialNode<T> > * temp = this -> head -> next;
 
 			// if the polynomial is empty
 			if (temp == NULL)
@@ -165,24 +164,24 @@ class Polynomial {
 		friend Polynomial<T> operator + (const Polynomial<T> & a, const Polynomial<T> & b) {		
 			Polynomial<T> ret;
 
-			PolynomialNode<T> * ha = a.l.head -> next, * hb = b.l.head -> next;
+			PolynomialNode<T> * ha = a.head -> next, * hb = b.head -> next;
 
 			while (ha || hb) {
 				if (ha && hb && ha -> exp == hb -> exp) {
-					ret.l.insert_in_front(PolynomialNode<T>(ha -> exp, ha -> coef + hb -> coef));
+					ret.insert_in_front(PolynomialNode<T>(ha -> exp, ha -> coef + hb -> coef));
 					ha = ha -> next, hb = hb -> next;
 				}
 				else if ((!ha && hb) || (ha && hb && ha -> exp > hb -> exp)) {
-					ret.l.insert_in_front(PolynomialNode<T>(hb -> exp, hb -> coef));
+					ret.insert_in_front(PolynomialNode<T>(hb -> exp, hb -> coef));
 					hb = hb -> next;
 				}
 				else {
-					ret.l.insert_in_front(PolynomialNode<T>(ha -> exp, ha -> coef));
+					ret.insert_in_front(PolynomialNode<T>(ha -> exp, ha -> coef));
 					ha = ha -> next;
 				}
 			}
 
-			ret.l.reverse();
+			ret.reverse();
 			return ret;
 		}
 
@@ -207,12 +206,12 @@ class Polynomial {
 			sort(p.begin(), p.end());
 
 			for (pair<int, T> i: p)
-				l.insert_in_front(PolynomialNode<T>(i.first, i.second));
-			l.reverse();
+				this -> insert_in_front(PolynomialNode<T>(i.first, i.second));
+			this -> reverse();
 
 
-			cout << endl << "[Input Finished]";
-			l.output(" + ");
+			cout << endl << "[Input Finished]   ";
+			this -> output(" + ");
 		}
 };
 
@@ -221,6 +220,7 @@ class Polynomial {
 
 int main() {
 	Polynomial<int> a;
+
 	a.input();
 
 	int x;
