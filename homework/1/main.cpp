@@ -216,7 +216,7 @@ class Polynomial : public LinkList< PolynomialTerm<T> > {
 };
 
 
-// -------------------- menu.cpp --------------------
+// -------------------- Menu.cpp --------------------
 
 template<typename T>
 class Menu {
@@ -265,7 +265,7 @@ class Menu {
 							cout << "[Output polynomial] there is no polynomial named " << s << endl;
 							break;
 						}
-						cout << mp[s];
+						cout << s << " = " << mp[s];
 						break;
 					}
 					// reverse and output
@@ -318,7 +318,8 @@ class Menu {
 						
 						Polynomial<T> c;
 						c = mp[sa] + mp[sb];
-						cout << sa << " + " << sb << " = " << c;
+						cout << endl << sa << " + " << sb << " = " << c;
+						break;
 					}
 					// quit
 					case 6:
