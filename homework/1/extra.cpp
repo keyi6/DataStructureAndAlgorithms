@@ -57,7 +57,7 @@ class LinkList {
         }
 
         // A - B ^ C
-        friend void A_substract_B_union_C(LinkList<T> & A, const LinkList<T> & B, const LinkList<T> C) {
+        friend void A_substract_B_union_C(LinkList<T> & A, const LinkList<T> & B, const LinkList<T> & C) {
             Node<T> * ha = A.head -> next, * hb = B.head -> next, * hc = C.head -> next, * pre = A.head;
 
             while (ha && hb && hc) {
