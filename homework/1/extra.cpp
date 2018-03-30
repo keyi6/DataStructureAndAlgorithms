@@ -111,5 +111,8 @@ int main() {
     // c = {3, 6, 9, ..., 12}
 
     A_substract_B_union_C(a, b, c);
-    cout << a << endl;
+	cout << "a = " << a << endl;
+	cout << "b = " << b << endl;
+	cout << "c = " << c << endl;
+    cout << "\na - b ^ c = " << a << endl;
 }
