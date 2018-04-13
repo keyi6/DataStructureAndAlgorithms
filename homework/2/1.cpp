@@ -24,9 +24,10 @@ void move(int * a, int len, int k) { // 循环右移k(k>0)位
 }
 
 int main() {
-	int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, len = 10;
+	int arr[] = {1, 2, 3, 4, 5, 6, 7, 8}, len = 8;
 
-	move(arr, len, 3);
+	move(arr, len, 6);
+	cout << "Result" << endl;
 	for (int i = 0; i < len; i ++)
 		cout << arr[i] << " ";
 	cout << endl;
