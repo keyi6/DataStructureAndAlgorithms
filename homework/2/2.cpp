@@ -14,7 +14,7 @@ struct LoopQueue {
     int head, tail, k;
 
     LoopQueue(int _k) {                // 新建的容量为k的循环队列
-        k = _k;
+        k = _k + 1;
         head = tail = 0;
         q = new T[k];
     }
@@ -38,39 +38,44 @@ struct LoopQueue {
         return q[head];
     }
 
-    T end() { // 获取队尾元素
-        if (empty()) exit(ERROR);      // 空
+    T end() {                         // 获取队尾元素
+        if (empty()) exit(ERROR);     // 空
         return q[(tail - 1 + k) % k];
     }
 
-    void pop() {                       // 弹出队头
-        if (empty()) exit(ERROR);      // 空
+    void pop() {                      // 弹出队头
+        if (empty()) exit(ERROR);     // 空
         head = (head + 1) % k;
     }
 };
 
 void k_fibbonachi(int k, int MAX) {
-    LoopQueue<int> q(k + 1);
+    LoopQueue<int> q(k);
 
-    // init
+                                      // init
     for (int i = 0; i < k - 1; i ++)
         q.push(0);
     q.push(1);
 
     int t;
     do {
-        t = q.end() * 2 - q.front();
+        t = 0;                        // 牺牲时间复杂度换取空间复杂度
+        for (int i = q.head; i != q.tail; i = (i + 1) % q.k)
+            t += q.q[i];
+		
+		if (t >= MAX) break;
+
         q.pop();
         q.push(t);
     } while (t < MAX);
 
 
     cout << "result" << endl;
-    for (int i = 0; i < k; i ++)
+        for (int i = q.head; i != q.tail; i = (i + 1) % q.k)
         cout << q.q[i] << " ";
     cout << endl;
 }
 
 int main() {
-    k_fibbonachi(3, 10);
+    k_fibbonachi(3, 20);
 }
