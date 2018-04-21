@@ -60,8 +60,7 @@ void build_tree_with_pre_order_and_in_order(Node * & root, string pre_order, str
     root = new Node(pre_order[0]);
     if (len == 1) return;
 
-    while (in_order[root_idx] != pre_order[0] && root_idx < len)
-        root_idx ++;
+    while (in_order[root_idx] != pre_order[0] && root_idx < len) root_idx ++;
 
     string l_in_order = in_order.substr(0, root_idx),
            r_in_order = in_order.substr(root_idx + 1, len - root_idx - 1);
@@ -79,8 +78,7 @@ void build_tree_with_in_order_and_post_order(Node * & root, string in_order, str
     root = new Node(post_order[len - 1]);
     if (len == 1) return;
 
-    while (in_order[root_idx] != post_order[len - 1] && root_idx < len)
-        root_idx ++;
+    while (in_order[root_idx] != post_order[len - 1] && root_idx < len) root_idx ++;
 
     string l_in_order = in_order.substr(0, root_idx),
            r_in_order = in_order.substr(root_idx + 1, len - root_idx - 1);
