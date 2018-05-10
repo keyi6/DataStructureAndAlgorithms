@@ -45,7 +45,11 @@ bool is_complete_binary_tree(Node * root) {
 }
 
 int main() {
+	freopen("test_tree_1", "r", stdin);
     Node * root = NULL;
     build_tree(root);
+    cout << (is_complete_binary_tree(root) ? "Yes" : "No") << endl;
+	root = NULL;
+	build_tree(root);
     cout << (is_complete_binary_tree(root) ? "Yes" : "No") << endl;
 }
