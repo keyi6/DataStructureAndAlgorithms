@@ -249,10 +249,12 @@ void post_order_traverse(Node * root) { // 后续遍历
 测试树🌲(输入为`test_tree_4`)
 
 ```
-    a     
-   / \   
-  b   c      
- / \  
-d   e   
+     a     
+   / | \   
+  b  c  d      
+    / \  
+   e   f
+       |
+       g
 ```
 

@@ -98,7 +98,7 @@ int get_depth(Node * root) {
 
 
 int main() {
-	freopen("test_tree2", "r", stdin);
+	freopen("test_tree_2", "r", stdin);
 
 	Node * root = NULL;
 	build_tree(root);
