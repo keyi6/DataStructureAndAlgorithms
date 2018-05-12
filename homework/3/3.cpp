@@ -85,29 +85,6 @@ void post_order_traverse(Node * root) { // 后续遍历
 }
 
 
-int get_depth(Node * root) {
-	if (! root) return 0;
-
-	Node * cur = NULL;
-	int depth = 1, cur_d;
-	queue< pair<Node *, int> > q;
-	
-	q.push(make_pair(root, 1));
-
-    while (not q.empty()) {
-        cur = q.front().first; 
-		cur_d = q.front().second;
-		q.pop();
-
-		depth = max(depth, cur_d);
-
-		if (cur -> l) q.push(make_pair(cur -> l, cur_d + 1));
-		if (cur -> r) q.push(make_pair(cur -> r, cur_d + 1));
-    }
-
-	return depth;
-}
-
 int main() {
 	freopen("test_tree_3", "r", stdin);
     Node * root = NULL;
@@ -119,5 +96,5 @@ int main() {
 	in_order_traverse(root);
 	cout << endl << "[post order] ";
 	post_order_traverse(root);
-	cout << endl << "depth = " << get_depth(root) << endl;
+	cout << endl;
 }
