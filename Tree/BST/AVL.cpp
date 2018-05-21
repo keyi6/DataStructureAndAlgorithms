@@ -71,13 +71,14 @@ class AVL {
 		void left_right_rotate(Node<T> * & parent) {
 			Node<T> * lr = parent -> l -> r;
 			Node<T> * l = parent -> l;
+			int lr_bf = lr -> balance_factor;
 
 			left_rotate(parent -> l);
 			right_rotate(parent);
 
-			if (lr -> balance_factor == 1)
+			if (lr_bf == 1)
 				l -> balance_factor = -1, parent -> balance_factor = 0;
-			else if (lr -> balance_factor == -1)
+			else if (lr_bf == -1)
 				l -> balance_factor = 0, parent -> balance_factor = 1;
 			else
 				l -> balance_factor = parent -> balance_factor = 0;
@@ -88,36 +89,41 @@ class AVL {
 		void right_left_rotate(Node<T> * & parent) {
 			Node<T> * rl = parent -> r -> l;
 			Node<T> * r = parent -> r;
+			int rl_bf = rl -> balance_factor;
 
 			right_rotate(parent -> r);
 			left_rotate(parent);
 
-			if (rl -> balance_factor == -1)
+			if (rl_bf == -1)
 				r -> balance_factor = 1, parent -> balance_factor = 0;
-			else if (rl -> balance_factor == 1)
+			else if (rl_bf == 1)
 				r -> balance_factor = 0, parent -> balance_factor = -1;
 			else
 				r -> balance_factor = parent -> balance_factor = 0;
 
 			rl -> balance_factor = 0;
+
 		}
 
-		void print() { //debug/////////////////////
-			queue< pair< Node<T> *, int > > q;
-			q.push(make_pair(root, 0));
+		void delete_leaf(Node<T> * & cur) {
+			Node<T> * parent = cur -> parent;
+			if (parent -> l == cur)
+				parent -> l = NULL, parent -> balance_factor ++;
+			else
+				parent -> r = NULL, parent -> balance_factor --;
 
-			while (not q.empty()) {
-				Node<T> * cur = q.front().first;
-				int depth = q.front().second;
-				q.pop();
+			if (! parent -> l && ! parent -> r && parent -> parent)
+				parent -> parent -> balance_factor += (parent -> parent -> l == parent ? -1 : 1);
 
-				cout << cur -> data << " " << depth << "  parent ";
-				if (cur -> parent) cout << cur->parent->data;cout << endl;
+			delete cur;
+		}
 
-				if (cur -> l) q.push(make_pair(cur -> l, depth + 1));
-				if (cur -> r) q.push(make_pair(cur -> r, depth + 1));
-			}
-			cout << endl;
+		void delete_left(Node<T> * & cur) {
+		
+		}
+
+		void delete_right(Node<T> * & cur) {
+		
 		}
 
 		void in_order_traverse(Node<T> * cur) {
@@ -163,6 +169,7 @@ class AVL {
 			cur = new Node<T> (data, parent);
 			(parent -> data > data ? parent -> l : parent -> r) = cur;
 
+
 			// step 3: update balance factor
 			while (parent) {
 				parent -> balance_factor += (parent -> l == cur ? -1 : 1);
@@ -174,25 +181,38 @@ class AVL {
 				else if (parent -> balance_factor == 2) {
 					if (cur -> balance_factor == 1) left_rotate(parent);
 					else right_left_rotate(parent);
-					break;
+					return true;
 				}
 				else if (parent -> balance_factor == -2) {
 					if (cur -> balance_factor == -1) right_rotate(parent);
 					else left_right_rotate(parent);
-					break;
+					return true;
 				}
 			}
-
-			return true;
+			return false;
 		}
 
 		void delete_data(T data) {
+			Node<T> * cur = find_data(root, data);
+			if (! cur) return;
 
+			if (! cur -> l && ! cur -> r) delete_leaf(cur);
+			else if (cur -> l && ! cur -> r) delete_left(cur);
+			else if (! cur -> l && cur -> r) delete_right(cur);
 		}
 
 		void print_sorted() {
 			in_order_traverse(root);
 			cout << endl;
+		}
+
+		void print() { //debug/////////////////////
+			queue< pair< Node<T> *, int > > q; q.push(make_pair(root, 0));
+			while (not q.empty()) {
+				Node<T> * cur = q.front().first; int depth = q.front().second; q.pop();
+				cout << cur -> data << "  parent "; if (cur -> parent) cout << cur->parent->data;cout << "   bf = " << cur -> balance_factor <<endl;
+				if (cur -> l) q.push(make_pair(cur -> l, depth + 1)); if (cur -> r) q.push(make_pair(cur -> r, depth + 1)); }
+			cout << endl; 
 		}
 };
 
@@ -202,5 +222,12 @@ int main() {
 	AVL<int> a;
 
 	for (int i = 0; i < 10; i ++)
-		a.insert_data(arr[i]), a.print_sorted();
+		a.insert_data(arr[i]);
+	a.print_sorted();
+	cout << endl;
+	a.print();
+	cout << endl;
+	
+	a.delete_data(10);
+	a.print();
 }
