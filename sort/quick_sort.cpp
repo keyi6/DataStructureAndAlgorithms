@@ -13,14 +13,14 @@ void quick_sort(int * a, int l, int r) {
 
 	int base = a[l], i = l, j = r;
 	while (i < j) {
-		while (a[j] > base && i < j) j --;
-		while (a[i] < base && i < j) i ++;
-
-		if (i < j)
-			swap(a[i], a[j]);
+		while (a[j] >= base && i < j) j --;
+		a[i] = a[j];
+		
+		while (a[i] <= base && i < j) i ++;
+		a[j] = a[i];
 	}
 
-	swap(a[l], a[i]);
+	a[i] = base;
 
 	quick_sort(a, l, i - 1);
 	quick_sort(a, i + 1, r);
@@ -28,7 +28,7 @@ void quick_sort(int * a, int l, int r) {
 
 int main() {
 	int a[20], n = 15;
-	
+
 	srand(time(NULL));
 	for (int i = 0; i < n; i ++)
 		a[i] = rand() % 30;
