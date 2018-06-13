@@ -1,12 +1,7 @@
 #include <ctime>
-#include <cstdio>
-#include <vector>
-#include <string>
-#include <cstring>
 #include <iostream>
 #include <algorithm>
 using namespace std;
-typedef long long ll;
 
 void quick_sort(int * a, int l, int r) {
 	if (l >= r) return;
