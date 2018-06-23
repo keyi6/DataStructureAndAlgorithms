@@ -34,9 +34,9 @@ bool is_symbol(char ch) {				   // 判断是不是符号
 void expression_DAG_to_RPN(int cur) {
 	for (Edge * p = head[cur]; p; p = p -> next) {
 		Node to = node[p -> to];
-		if (is_symbol(to.ch))              // 如果是符号
+		if (is_symbol(to.ch))			   // 如果是符号
 			expression_DAG_to_RPN(to.num);
-		else                               // 如果是字母/数字
+		else							   // 如果是字母/数字
 			cout << to.ch;
 	}
 

@@ -28,7 +28,7 @@ void build_tree(Node * & root) {
 }
 
 
-void in_order_traverse(Node * root) {   // 中序遍历
+void in_order_traverse(Node * root) {	// 中序遍历
 	stack< Node * > s;
 	Node * p = root;
 	while (not s.empty() || p) {
@@ -103,9 +103,9 @@ int main() {
 	Node * root = NULL;
 	build_tree(root);
 
-	cout         << "[in order]       ";
+	cout		 << "[in order]		  ";
 	in_order_traverse(root);
-	cout << endl << "[leaf]           " << count_leaf(root);
-	cout << endl << "[tree]           " << count_tree(root);
+	cout << endl << "[leaf]			  " << count_leaf(root);
+	cout << endl << "[tree]			  " << count_tree(root);
 	cout << endl << "[1st tree depth] " << get_depth(root) << endl;
 }

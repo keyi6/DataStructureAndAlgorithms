@@ -18,7 +18,7 @@ inline int kmp(string S, string T) {
 	for (int i = 0, j = -1; i < lenS; i ++) {
 		while (j >= 0 && T[j + 1] != S[i]) j = next[j];
 		if (T[j + 1] == S[i]) j ++;
-		if (j == lenT - 1) return i - lenT + 1;           // finsih
+		if (j == lenT - 1) return i - lenT + 1;			  // finsih
 	}
 
 	return -1;

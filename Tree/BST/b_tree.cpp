@@ -74,7 +74,7 @@ class BTree {
 				cur = q.front().first, father = q.front().second;
 				q.pop();
 
-				cout << (* cur); if (father) cout << "   [father]" << (* father) << endl;
+				cout << (* cur); if (father) cout << "	 [father]" << (* father) << endl;
 
 				for (Node<T> * _p: cur -> p)
 					q.push(make_pair(_p, cur));

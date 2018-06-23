@@ -210,7 +210,7 @@ class AVL {
 			queue< pair< Node<T> *, int > > q; q.push(make_pair(root, 0));
 			while (not q.empty()) {
 				Node<T> * cur = q.front().first; int depth = q.front().second; q.pop();
-				cout << cur -> data << "  parent "; if (cur -> parent) cout << cur->parent->data;cout << "   bf = " << cur -> balance_factor <<endl;
+				cout << cur -> data << "  parent "; if (cur -> parent) cout << cur->parent->data;cout << "	 bf = " << cur -> balance_factor <<endl;
 				if (cur -> l) q.push(make_pair(cur -> l, depth + 1)); if (cur -> r) q.push(make_pair(cur -> r, depth + 1)); }
 			cout << endl; 
 		}

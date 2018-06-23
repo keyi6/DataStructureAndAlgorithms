@@ -16,7 +16,7 @@ void dfs(int cur, int dest, bool & flag) {
 	if (dest == cur || g[cur][dest]) { flag = true; return; } // 找到
 
 	for (int i = 0; i < vex_num; i ++)
-		if (i != cur && g[cur][i])                            // 如果有边
+		if (i != cur && g[cur][i])							  // 如果有边
 			dfs(cur, dest, flag);
 }
 

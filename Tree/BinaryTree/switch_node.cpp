@@ -7,38 +7,38 @@ using namespace std;
 typedef long long ll;
 
 struct Node {
-    char data;
-    Node * l, * r;
+	char data;
+	Node * l, * r;
 
-    Node(char _data = ' ') { data = _data; l = r = NULL; }
+	Node(char _data = ' ') { data = _data; l = r = NULL; }
 	Node(const Node & _) { data = _.data, l = _.l, r = _.r; }
 };
 
 
 void build_tree(Node * & root) {
-    char ch;
-    cin >> ch;
+	char ch;
+	cin >> ch;
 
-    if (ch == '#') return;
-    root = new Node(ch);
+	if (ch == '#') return;
+	root = new Node(ch);
 
-    build_tree(root -> l);
-    build_tree(root -> r);
+	build_tree(root -> l);
+	build_tree(root -> r);
 }
 
 
 void bfs(Node * root) {
-    queue<Node *> q;
-    q.push(root);
-    while (not q.empty()) {
-        Node * cur = q.front();
-        q.pop();
+	queue<Node *> q;
+	q.push(root);
+	while (not q.empty()) {
+		Node * cur = q.front();
+		q.pop();
 
-        cout << cur -> data;
+		cout << cur -> data;
 
-        if (cur -> l) q.push(cur -> l);
-        if (cur -> r) q.push(cur -> r);
-    }
+		if (cur -> l) q.push(cur -> l);
+		if (cur -> r) q.push(cur -> r);
+	}
 }
 
 
@@ -54,7 +54,7 @@ void dfs_switch(Node * & root) {
 
 int main() {
 	Node * root = NULL;
-    build_tree(root);
+	build_tree(root);
 	bfs(root);
 	cout << endl;
 
