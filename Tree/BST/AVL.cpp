@@ -1,3 +1,4 @@
+#define DEBUG true
 #include <queue>
 #include <cstdio>
 #include <vector>
@@ -25,6 +26,7 @@ class AVL {
 		Node<T> * root;
 
 		void left_rotate(Node<T> * & parent) {
+			if (DEBUG) cout << "left_rotate\n";
 			Node<T> * rl = parent -> r -> l;
 			Node<T> * r = parent -> r;
 			Node<T> * p = parent -> parent;
@@ -47,6 +49,7 @@ class AVL {
 		}
 
 		void right_rotate(Node<T> * & parent) {
+			if (DEBUG) cout << "right_rotate\n";
 			Node<T> * lr = parent -> l -> r;
 			Node<T> * l = parent -> l;
 			Node<T> * p = parent -> parent;
@@ -119,11 +122,9 @@ class AVL {
 		}
 
 		void delete_left(Node<T> * & cur) {
-		
 		}
 
 		void delete_right(Node<T> * & cur) {
-		
 		}
 
 		void in_order_traverse(Node<T> * cur) {
@@ -212,22 +213,27 @@ class AVL {
 				Node<T> * cur = q.front().first; int depth = q.front().second; q.pop();
 				cout << cur -> data << "  parent "; if (cur -> parent) cout << cur->parent->data;cout << "	 bf = " << cur -> balance_factor <<endl;
 				if (cur -> l) q.push(make_pair(cur -> l, depth + 1)); if (cur -> r) q.push(make_pair(cur -> r, depth + 1)); }
-			cout << endl; 
+			cout << endl;
 		}
 };
 
 
 int main() {
-	int arr[] = {4, 6, 23, 54, 29, 10, 0, 1, 42, 3, 9};
+	int arr[] = {57, 90, 82, 28, 77, 100, 88, 16};
 	AVL<int> a;
 
-	for (int i = 0; i < 10; i ++)
+	for (int i = 0; i < 8; i ++) { 
 		a.insert_data(arr[i]);
+		if (DEBUG) {
+			cout << "[" << arr[i] << "]\n"; a.print(); 
+			cout << "\n\n";
+		}
+	}
 	a.print_sorted();
 	cout << endl;
-	a.print();
-	cout << endl;
-	
-	a.delete_data(10);
+	// a.print();
+	// cout << endl;
+
+	// a.delete_data(10);
 	a.print();
 }
