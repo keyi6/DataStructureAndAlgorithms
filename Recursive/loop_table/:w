@@ -20,12 +20,13 @@ void schedule(int n) {
 	for (int i = 1; i <= n; i ++)
 		res[1][i] = res[i][1] = i;
 
-	for (int width = 2, gap = 1; width <= n; width <<= 1, gap <<= 1)
-		for (int i = 1; i <= gap; i ++)
-			for (int t = 0; t < n / width; t ++)
-				for (int j = t * width + 1; j <= t * width + gap; j ++)
-					res[i + gap][j + gap] = res[i][j],
-					res[i + gap][j]			  = res[i][j + gap];
+	for (int gap = 1, lg = 0; gap < n; gap *= 2, lg ++) 
+		for (int t = 0; t < n / gap; t ++) {
+			for (int i = gap; i <= gap * 2; i ++)
+				for (int j = gap; j <= gap * 2; j ++)
+					res[i][j + lg * gap * 2]	   = res[i - m][j + lg * gap * 2 - gap],
+					res[i][j + lg * gap * 2 - gap] = res[i - m][j + lg * gap * 2];
+		}
 }
 
 
