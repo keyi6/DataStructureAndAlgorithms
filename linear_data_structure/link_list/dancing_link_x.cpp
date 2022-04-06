@@ -14,7 +14,7 @@ struct DancingLinks{
 		Col[MAXN], Row[MAXN],
 		L[MAXN], R[MAXN], U[MAXN], D[MAXN],
 		head[MAXA][MAXA][MAXA],
-		anna[MAXA][MAXA];
+		arr[MAXA][MAXA];
 
 	inline	void Clear() {
 		memset(S, 0, sizeof(S));
@@ -33,14 +33,14 @@ struct DancingLinks{
 
 		for (int i=1; i<=9; i++)
 			for (int j=1; j<=9; j++)
-				anna[i][j] = c-48,
+				arr[i][j] = c-48,
 				c = getchar();
 	}
 
 	inline void Print() {
 		for (int i=1; i<=9; i++)
 			for (int j=1; j<=9; j++)
-				printf("%d", anna[i][j]);
+				printf("%d", arr[i][j]);
 		printf("\n");
 	}
 
@@ -82,7 +82,7 @@ struct DancingLinks{
 
 			for (int i=D[c]; i!=c; i=D[i]) {
 				temp = Row[i];
-				anna[temp/100][(temp/10)%10] = temp%10;
+				arr[temp/100][(temp/10)%10] = temp%10;
 				for (int j=R[i]; j!=i; j=R[j])
 					Remove(Col[j]);
 		
@@ -115,7 +115,7 @@ struct DancingLinks{
 			
 			for (int i=1; i<=9; i++)
 				for (int j=1; j<=9; j++)	
-					if (anna[i][j]) AddRow(i, j, anna[i][j]);
+					if (arr[i][j]) AddRow(i, j, arr[i][j]);
 					else
 						for (int k=1;k<=9;k++)
 							AddRow(i, j, k);
@@ -123,10 +123,10 @@ struct DancingLinks{
 			int k = 0;
 			for (int i=1; i<=9; i++)
 				for (int j=1; j<=9; j++)
-					if (anna[i][j]) {
+					if (arr[i][j]) {
 						++ k;
-						Remove(Col[head[i][j][anna[i][j]]]);
-						for (int u=R[head[i][j][anna[i][j]]]; u!=head[i][j][anna[i][j]]; u=R[u])
+						Remove(Col[head[i][j][arr[i][j]]]);
+						for (int u=R[head[i][j][arr[i][j]]]; u!=head[i][j][arr[i][j]]; u=R[u])
 							Remove(Col[u]);
 					}
 
@@ -137,5 +137,5 @@ struct DancingLinks{
 
 int main() {
 	DancingLinks dl;
-	dl.solve();
+	dl.Solve();
 }
